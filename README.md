@@ -2,8 +2,10 @@
 Postprocessing command "stats"
 
 Usage examples:
-for `avg` function: `... | stats avg(age) as AvgAge, stats avg(cars) as AvgCars`
+for `avg` function: `... | stats avg(age) as AvgAge, avg(cars) as AvgCars`
 Grouping `by` is not available for using with this function.
+
+for `count` function: `... | stats count(Surname) as CountSurname by Name, count(Surname) by age`
 
 ## Getting started
 ###  Prerequisites
