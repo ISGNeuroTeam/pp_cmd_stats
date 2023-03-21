@@ -1,8 +1,9 @@
 # pp_cmd_stats
 Postprocessing command "stats"
 
-Usage example:
-`... | stats`
+Usage examples:
+for `avg` function: `... | stats avg(age) as AvgAge, stats avg(cars) as AvgCars`
+Grouping `by` is not available for using with this function.
 
 ## Getting started
 ###  Prerequisites
