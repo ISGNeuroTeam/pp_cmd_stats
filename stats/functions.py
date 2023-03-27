@@ -98,6 +98,20 @@ def _sum(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     return result
 
 
+def _var(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'var function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'var function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "var" if named_as is None else named_as
+    result = df[args[0]].var()
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
+
+
 FUNCTIONS = {
     'avg': _avg,
     'count': _count,
@@ -105,7 +119,8 @@ FUNCTIONS = {
     'min': _min,
     'max': _max,
     'stddev': _stddev,
-    'sum': _sum
+    'sum': _sum,
+    'var': _var
 }
 
 

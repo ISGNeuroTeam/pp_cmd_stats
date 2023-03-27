@@ -15,6 +15,8 @@ for `stddev` function: `... | stats stddev(age) as StdAge, stddev(age)`
 
 for `sum` function: `... | stats sum(age) as SumAge, sum(age)`
 
+for `var` function: `... | stats var(age) as VarAge, var(age)`
+
 
 ## Getting started
 ###  Prerequisites
