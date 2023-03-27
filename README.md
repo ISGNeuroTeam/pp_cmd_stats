@@ -7,6 +7,13 @@ Grouping `by` is not available for using with this function.
 
 for `count` function: `... | stats count(Surname) as CountSurname by Name, count(Surname) by age`
 
+for `min` function: `... | stats min(age) as MinAge, min(age)`
+
+for `max` function: `... | stats max(age) as MaxAge, max(age)`
+
+for `stddev` function: `... | stats stddev(age) as StdAge, stddev(age)`
+
+
 ## Getting started
 ###  Prerequisites
 1. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)

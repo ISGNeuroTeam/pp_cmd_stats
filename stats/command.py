@@ -1,6 +1,6 @@
 import pandas
 import pandas as pd
-from otlang.sdk.syntax import Keyword, Positional, OTLType
+from otlang.sdk.syntax import Positional, OTLType
 from pp_exec_env.base_command import BaseCommand, Syntax
 from .functions import generate
 
@@ -38,7 +38,7 @@ class StatsCommand(BaseCommand):
         result_list = []
         for val in values:
             params = dict()
-            funcname = val.value["funcname"]["value"]
+            funcname: object = val.value["funcname"]["value"]
             params['args'] = [x["value"] for x in val.value["funcargs"]]
             params['named_as'] = None if val.value.get("named_as") is None else val.value["named_as"]["value"]
             params['grouped_by'] = [x["value"] for x in val.value["grouped_by"]]

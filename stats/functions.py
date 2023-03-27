@@ -3,7 +3,7 @@ import pandas as pd
 from pandas.core.dtypes.common import is_numeric_dtype
 
 
-def _avg(df: pd.DataFrame, args, grouped_by, named_as=None):
+def _avg(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     # error checks
     if len(args) > 1:
         raise ValueError(f'avg function may have only 1 argument, we have got {len(args)}: {args}.')
@@ -19,7 +19,7 @@ def _avg(df: pd.DataFrame, args, grouped_by, named_as=None):
     return pd.DataFrame([[result]], columns=[named_as])
 
 
-def _count(df: pd.DataFrame, args, grouped_by, named_as=None):
+def _count(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     # error checks
     if len(args) > 1:
         raise ValueError(f'avg function may have only 1 argument, we have got {len(args)}: {args}.')
@@ -38,9 +38,59 @@ def _count(df: pd.DataFrame, args, grouped_by, named_as=None):
     return result
 
 
+def _distinct_count(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    ...
+
+
+def _min(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'min function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'min function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "min" if named_as is None else named_as
+    result = df[args[0]].min()
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
+
+
+def _max(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'max function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'max function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "max" if named_as is None else named_as
+    result = df[args[0]].max()
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
+
+
+def _stddev(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'stddev function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'stddev function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "stddev" if named_as is None else named_as
+    result = df[args[0]].std()
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
+
+
 FUNCTIONS = {
     'avg': _avg,
-    'count': _count
+    'count': _count,
+    'distinct_count': _distinct_count,
+    'min': _min,
+    'max': _max,
+    'stddev': _stddev
 }
 
 
