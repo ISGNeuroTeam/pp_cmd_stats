@@ -84,13 +84,28 @@ def _stddev(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     return result
 
 
+def _sum(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'sum function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'sum function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "sum" if named_as is None else named_as
+    result = df[args[0]].sum()
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
+
+
 FUNCTIONS = {
     'avg': _avg,
     'count': _count,
     'distinct_count': _distinct_count,
     'min': _min,
     'max': _max,
-    'stddev': _stddev
+    'stddev': _stddev,
+    'sum': _sum
 }
 
 

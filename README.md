@@ -13,6 +13,8 @@ for `max` function: `... | stats max(age) as MaxAge, max(age)`
 
 for `stddev` function: `... | stats stddev(age) as StdAge, stddev(age)`
 
+for `sum` function: `... | stats sum(age) as SumAge, sum(age)`
+
 
 ## Getting started
 ###  Prerequisites
