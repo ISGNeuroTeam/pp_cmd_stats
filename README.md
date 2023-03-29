@@ -8,14 +8,25 @@ Grouping `by` is not available for using with this function.
 for `count` function: `... | stats count(Surname) as CountSurname by Name, count(Surname) by age`
 
 for `min` function: `... | stats min(age) as MinAge, min(age)`
+Grouping `by` is not available for using with this function.
 
 for `max` function: `... | stats max(age) as MaxAge, max(age)`
+Grouping `by` is not available for using with this function.
 
 for `stddev` function: `... | stats stddev(age) as StdAge, stddev(age)`
+Grouping `by` is not available for using with this function.
 
 for `sum` function: `... | stats sum(age) as SumAge, sum(age)`
+Grouping `by` is not available for using with this function.
 
 for `var` function: `... | stats var(age) as VarAge, var(age)`
+Grouping `by` is not available for using with this function.
+
+for `first` function: `... | stats first(age) as FirstAge, first(age)`
+Grouping `by` is not available for using with this function.
+
+for `last` function: `... | stats last(age) as LastAge, last(age)`
+Grouping `by` is not available for using with this function.
 
 
 ## Getting started

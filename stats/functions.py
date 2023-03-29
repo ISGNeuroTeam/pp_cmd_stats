@@ -1,4 +1,3 @@
-import pandas
 import pandas as pd
 from pandas.core.dtypes.common import is_numeric_dtype
 
@@ -112,6 +111,42 @@ def _var(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     return result
 
 
+def _first(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'first function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'first function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "first" if named_as is None else named_as
+    result = df[args[0]][0]
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
+
+
+def _last(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'last function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'last function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "last" if named_as is None else named_as
+    result = df[args[0]][df[args[0]].count() - 1]
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
+
+
+def _earliest(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    ...
+
+
+def _latest(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    ...
+
+
 FUNCTIONS = {
     'avg': _avg,
     'count': _count,
@@ -120,7 +155,11 @@ FUNCTIONS = {
     'max': _max,
     'stddev': _stddev,
     'sum': _sum,
-    'var': _var
+    'var': _var,
+    'first': _first,
+    'last': _last,
+    'earliest': _earliest,
+    'latest': _latest
 }
 
 

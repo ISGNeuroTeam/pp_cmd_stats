@@ -22,15 +22,15 @@ class StatsCommand(BaseCommand):
         values = [x for x in function_name]
 
         # Make your logic here
-        df = pd.DataFrame(
-            [
-                ["John", "Snow", 10],
-                ["Alex", "Smith", 7],
-                ["Anna", "Show", 21],
-                ["James", "Bond", 3],
-                ["John", "Dow", 14]
-            ],
-            columns=["Name", "Surname", "age"])
+        # df = pd.DataFrame(
+        #     [
+        #         ["John", "Snow", 10],
+        #         ["Alex", "Smith", 7],
+        #         ["Anna", "Show", 21],
+        #         ["James", "Bond", 3],
+        #         ["John", "Dow", 14]
+        #     ],
+        #     columns=["Name", "Surname", "age"])
 
         # Add description of what going on for log progress
         # self.log_progress('First part is complete.', stage=1, total_stages=2)
