@@ -28,6 +28,8 @@ Grouping `by` is not available for using with this function.
 for `last` function: `... | stats last(age) as LastAge, last(age)`
 Grouping `by` is not available for using with this function.
 
+for `distinct_count` function: `... | stats distinct_count(Surname) by Name as DistinctCountSurname`
+
 
 ## Getting started
 ###  Prerequisites
@@ -53,4 +55,4 @@ Storage directory is /tmp/pp_cmd_test/storage
 Commmands directory is /tmp/pp_cmd_test/pp_cmd
 query: | otl_v1 <# makeresults count=100 #> |  stats 
 ```
-# pp_cms_stats
+# pp_cmd_stats

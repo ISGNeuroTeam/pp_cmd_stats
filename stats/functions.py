@@ -38,7 +38,22 @@ def _count(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
 
 
 def _distinct_count(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
-    ...
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'distinct_count function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 1:
+        raise ValueError(f'distinct_count function may be grouped only by 1 name, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    named_as = "distinct_count" if named_as is None else named_as
+    column_name = args[0]
+    if len(grouped_by) == 0:
+        result = len(df[column_name].value_counts())
+        result = pd.DataFrame([[result]], columns=[named_as])
+    else:
+        group_by_name = grouped_by[0]
+        result = df[[column_name, group_by_name]].drop_duplicates().value_counts(df[group_by_name]).to_frame(name=named_as)
+    # done
+    return result
 
 
 def _min(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
