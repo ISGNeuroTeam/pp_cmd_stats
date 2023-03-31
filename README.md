@@ -30,6 +30,9 @@ Grouping `by` is not available for using with this function.
 
 for `distinct_count` function: `... | stats distinct_count(Surname) by Name as DistinctCountSurname`
 
+for `list` function: `... | stats list(Surname) as listSurname`
+Grouping `by` is not available for using with this function.
+
 
 ## Getting started
 ###  Prerequisites

@@ -51,7 +51,8 @@ def _distinct_count(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.Dat
         result = pd.DataFrame([[result]], columns=[named_as])
     else:
         group_by_name = grouped_by[0]
-        result = df[[column_name, group_by_name]].drop_duplicates().value_counts(df[group_by_name]).to_frame(name=named_as)
+        result = df[[column_name, group_by_name]].drop_duplicates().value_counts(df[group_by_name]).to_frame(
+            name=named_as)
     # done
     return result
 
@@ -154,6 +155,24 @@ def _last(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     return result
 
 
+def _list(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'list function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'llist function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    column_name = args[0]
+    named_as = "list" if named_as is None else named_as
+    result = df[[column_name]].rename(columns={column_name: named_as})
+    # done
+    return result
+
+
+def _values(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
+    ...
+
+
 def _earliest(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     ...
 
@@ -173,6 +192,8 @@ FUNCTIONS = {
     'var': _var,
     'first': _first,
     'last': _last,
+    'list': _list,
+    'values': _values,
     'earliest': _earliest,
     'latest': _latest
 }
