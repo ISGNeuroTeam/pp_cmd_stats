@@ -160,7 +160,7 @@ def _list(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
     if len(args) > 1:
         raise ValueError(f'list function may have only 1 argument, we have got {len(args)}: {args}.')
     if len(grouped_by) > 0:
-        raise ValueError(f'llist function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+        raise ValueError(f'list function can not be grouped, got {len(grouped_by)}: {grouped_by}')
     # calculation
     column_name = args[0]
     named_as = "list" if named_as is None else named_as
@@ -170,7 +170,18 @@ def _list(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
 
 
 def _values(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
-    ...
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'values function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'values function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    # calculation
+    column_name = args[0]
+    named_as = "values" if named_as is None else named_as
+    result = [x[0] for x in df[[column_name]].values.tolist()]
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
 
 
 def _earliest(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
