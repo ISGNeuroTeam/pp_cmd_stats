@@ -1,0 +1,15 @@
+## [0.1.0] - All 14 required aggregations are now added to stats postprocessing command:
+- avg
+- count
+- distinct_count
+- min
+- max
+- stddev
+- sum
+- var
+- first
+- last
+- list
+- values
+- earliest
+- latest
