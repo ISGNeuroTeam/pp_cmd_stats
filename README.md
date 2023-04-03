@@ -36,6 +36,14 @@ Grouping `by` is not available for using with this function.
 for `values` function: `... | stats values(age) as ValuesAge`
 Grouping `by` is not available for using with this function.
 
+for `earliest` function: `... | stats earliest(age) as EarliestAge`
+Grouping `by` is not available for using with this function.
+It works only when dataframe has `_time` column with datetime data.
+
+for `latest` function: `... | stats latest(age) as LatestAge`
+Grouping `by` is not available for using with this function.
+It works only when dataframe has `_time` column with datetime data.
+
 
 ## Getting started
 ###  Prerequisites

@@ -185,11 +185,39 @@ def _values(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
 
 
 def _earliest(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
-    ...
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'earliest function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'earliest function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    if '_time' not in list(df):
+        raise ValueError(f'earliest function requires "_time" column in dataframe, got: {list(df)}')
+    # calculation
+    column_name = args[0]
+    named_as = "earliest" if named_as is None else named_as
+    df['_time'] = pd.to_datetime(df['_time'])
+    result = df.iloc[df['_time'].argmin()][column_name]
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
 
 
 def _latest(df: pd.DataFrame, args, grouped_by, named_as=None) -> pd.DataFrame:
-    ...
+    # error checks
+    if len(args) > 1:
+        raise ValueError(f'earliest function may have only 1 argument, we have got {len(args)}: {args}.')
+    if len(grouped_by) > 0:
+        raise ValueError(f'earliest function can not be grouped, got {len(grouped_by)}: {grouped_by}')
+    if '_time' not in list(df):
+        raise ValueError(f'earliest function requires "_time" column in dataframe, got: {list(df)}')
+    # calculation
+    column_name = args[0]
+    named_as = "earliest" if named_as is None else named_as
+    df['_time'] = pd.to_datetime(df['_time'])
+    result = df.iloc[df['_time'].argmax()][column_name]
+    result = pd.DataFrame([[result]], columns=[named_as])
+    # done
+    return result
 
 
 FUNCTIONS = {
